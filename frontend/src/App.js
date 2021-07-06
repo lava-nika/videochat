@@ -9,8 +9,8 @@ import Peer from "simple-peer"
 import io from "socket.io-client"
 import "./App.css"
 
-
-const socket = io.connect('http://localhost:5000')
+// const socket = io.connect('https://localhost3000')
+const socket = io('https://lava-chat.herokuapp.com/');
 function App() {
 	const [ me, setMe ] = useState("")
 	const [ stream, setStream ] = useState()
