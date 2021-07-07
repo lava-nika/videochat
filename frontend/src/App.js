@@ -48,7 +48,8 @@ function App() {
 	const onMessageSubmit = (e) => {
 		// prevents page refresh from happening
 		e.preventDefault()
-		const {name, message} = state
+        // const {name, message} = state
+		const { message } = state
 		socket.emit('message', {name, message})
 		setState({message: '', name })
 	}
@@ -72,6 +73,8 @@ function App() {
 			setStream(stream)
 				myVideo.current.srcObject = stream
 		})
+
+
 
 	socket.on("me", (id) => {
 			setMe(id)
@@ -135,6 +138,26 @@ function App() {
 		connectionRef.current.destroy()
 	}
 
+    // Mute/unmute
+
+	let isAudio = true
+
+	let isVideo = true
+
+	const toggleAudio = () => {
+
+		isAudio = !isAudio
+		stream.getAudioTracks()[0].enabled = isAudio
+
+	}
+
+	const toggleVideo = () => {
+
+		isVideo = !isVideo
+		stream.getVideoTracks()[0].enabled = isVideo
+
+	}
+
 	return (
 		<>
 			<h1 style={{ textAlign: "center", color: '#fff' }}>Lava Chat</h1>
@@ -142,7 +165,12 @@ function App() {
 			<div className="video-container">
 				<div className="video">
 					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+
+					<button onClick={toggleVideo} type="button">Camera on/off</button>
+					<button onClick={toggleAudio} type="button">Mute/Unmute</button>
+					
 				</div>
+				
 				<div className="video">
 					{callAccepted && !callEnded ?
 					<video playsInline ref={userVideo} autoPlay style={{ width: "300px"}} />:
