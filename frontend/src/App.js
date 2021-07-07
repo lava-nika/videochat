@@ -10,6 +10,7 @@ import io from "socket.io-client"
 import "./App.css"
 
 // const socket = io.connect('https://localhost3000')
+// "proxy": "https://localhost5000/", - in package.json of frontend
 const socket = io('https://lava-chat.herokuapp.com/');
 function App() {
 	const [ me, setMe ] = useState("")
@@ -95,7 +96,7 @@ function App() {
 
 	return (
 		<>
-			<h1 style={{ textAlign: "center", color: '#fff' }}>Zoomish</h1>
+			<h1 style={{ textAlign: "center", color: '#fff' }}>Lava Chat</h1>
 		<div className="container">
 			<div className="video-container">
 				<div className="video">
