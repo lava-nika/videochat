@@ -17,6 +17,8 @@ app.get('/', (req, res) => {
 });
 
 io.on("connection", (socket) => {
+
+	//for video call
 	socket.emit("me", socket.id)
 
 	socket.on("disconnect", () => {
@@ -29,6 +31,11 @@ io.on("connection", (socket) => {
 
 	socket.on("answerCall", (data) => {
 		io.to(data.to).emit("callAccepted", data.signal)
+	})
+	
+	 // For chat application
+	socket.on('message', ({ name, message }) => {
+		io.emit('message', { name, message })
 	})
 })
 

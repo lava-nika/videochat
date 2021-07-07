@@ -13,6 +13,9 @@ import "./App.css"
 // "proxy": "https://localhost5000/", - in package.json of frontend
 const socket = io('https://lava-chat.herokuapp.com/');
 function App() {
+
+	// Video
+
 	const [ me, setMe ] = useState("")
 	const [ stream, setStream ] = useState()
 	const [ receivingCall, setReceivingCall ] = useState(false)
@@ -25,6 +28,44 @@ function App() {
 	const myVideo = useRef()
 	const userVideo = useRef()
 	const connectionRef= useRef()
+
+	// Chat
+	const [state, setState] = useState({message: '', name: ''})
+	const [chat, setChat] = useState([])
+
+	useEffect(() => {
+		socket.on('message', ({name, message}) => {
+			setChat([...chat, {name, message}])
+		})
+	})
+
+
+
+	const onTextChange = e => {
+		setState({...state, [e.target.name]: e.target.value})
+	}
+
+	const onMessageSubmit = (e) => {
+		// prevents page refresh from happening
+		e.preventDefault()
+		const {name, message} = state
+		socket.emit('message', {name, message})
+		setState({message: '', name })
+	}
+
+	const renderChat = () => {
+		return chat.map(({name, message}, index) => (
+			<div key={index}>
+				<h3>
+					{name}: <span>{message}</span>
+				</h3>
+			</div>
+		))
+	}
+
+
+
+	// Video contd
 
 	useEffect(() => {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
@@ -153,6 +194,39 @@ function App() {
 					</div>
 				) : null}
 			</div>
+
+			<div className = "card">
+				<form onSubmit = {onMessageSubmit}>
+					<h2> Messenger </h2>
+					<div classname="name-field">
+						<TextField 
+						    name="name" 
+							onChange={e => onTextChange(e)} 
+							value={state.name} 
+							label="Name"
+						/>
+					</div>
+					<div>
+						<TextField 
+						    name="message" 
+							onChange={e => onTextChange(e)} 
+							value={state.message} 
+							id="outlined-multiline-static"
+							variant="outlined"
+							label="Message"
+						/>
+					</div>
+					<button>Send Message</button>
+				</form>
+				<div className="render-chat">
+					<h1>
+						Chat Log
+					</h1>
+					{renderChat()}
+				</div>
+			</div>
+			
+
 		</div>
 		</>
 	)
