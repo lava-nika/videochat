@@ -91,10 +91,15 @@ function App() {
 	const callUser = (id) => {
 		const peer = new Peer({
 			initiator: true,
+
 			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
+			secure: true,
+			host: 'https://lava-chat.herokuapp.com/',
+			path: '/peerjs',
+			port: '443',
+
 			trickle: false,
 			stream: stream,
-			port: 443
 		})
 		peer.on("signal", (data) => {
 			socket.emit("callUser", {
@@ -122,9 +127,17 @@ function App() {
 		const peer = new Peer({
 			initiator: false,
 			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
+
+
+			secure: true,
+			host: 'https://lava-chat.herokuapp.com/',
+			path: '/peerjs',
+			port: '443',
+			
+
 			trickle: false,
 			stream: stream,
-			port: 443
+			
 		})
 		peer.on("signal", (data) => {
 			socket.emit("answerCall", { signal: data, to: caller })
