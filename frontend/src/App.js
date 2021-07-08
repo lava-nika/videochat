@@ -91,7 +91,7 @@ function App() {
 	const callUser = (id) => {
 		const peer = new Peer({
 			initiator: true,
-			trickle: false,
+			trickle: true,
 			stream: stream
 		})
 		peer.on("signal", (data) => {
@@ -119,7 +119,7 @@ function App() {
 		setCallAccepted(true)
 		const peer = new Peer({
 			initiator: false,
-			trickle: false,
+			trickle: true,
 			stream: stream
 		})
 		peer.on("signal", (data) => {
