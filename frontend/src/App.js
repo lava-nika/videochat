@@ -29,6 +29,8 @@ function App() {
 	const userVideo = useRef()
 	const connectionRef= useRef()
 
+	var wrtc = require('wrtc')
+
 	// Chat
 	const [state, setState] = useState({message: '', name: ''})
 	const [chat, setChat] = useState([])
@@ -92,11 +94,23 @@ function App() {
 		const peer = new Peer({
 			initiator: true,
 
-			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
-			secure: true,
+			config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
+			/*secure: true,
 			host: 'https://lava-chat.herokuapp.com/',
 			path: '/peerjs',
-			port: '443',
+			port: '443', */
+
+			config: {
+				iceServers: [
+					{
+						url: 'turn:numb.viagenie.ca',
+						credential: 'muazkh',
+						username: 'webrtc@live.com'
+					}
+				]
+			},
+
+			wrtc: wrtc,
 
 			trickle: false,
 			stream: stream,
@@ -127,13 +141,22 @@ function App() {
 		const peer = new Peer({
 			initiator: false,
 			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
+            
+			config: {
+				iceServers: [
+					{
+						url: 'turn:numb.viagenie.ca',
+						credential: 'muazkh',
+						username: 'webrtc@live.com'
+					}
+				]
+			},
 
-
-			secure: true,
+			/* secure: true,
 			host: 'https://lava-chat.herokuapp.com/',
 			path: '/peerjs',
-			port: '443',
-			
+			port: '443', */
+
 
 			trickle: false,
 			stream: stream,
