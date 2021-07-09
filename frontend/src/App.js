@@ -29,7 +29,7 @@ function App() {
 	const userVideo = useRef()
 	const connectionRef= useRef()
 
-	var wrtc = require('wrtc')
+	// var wrtc = require('wrtc')
 
 	// Chat
 	const [state, setState] = useState({message: '', name: ''})
@@ -110,7 +110,7 @@ function App() {
 				]
 			},
 
-			wrtc: wrtc,
+			//wrtc: wrtc,
 
 			trickle: false,
 			stream: stream,
