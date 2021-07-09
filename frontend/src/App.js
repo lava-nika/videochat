@@ -101,15 +101,17 @@ function App() {
 			port: '443', */
 
 			config: {
-				iceServers: [
-					{
-						urls: 'turn:numb.viagenie.ca',
-						credential: 'Omsairam@1529',
-						username: 'lavanika2011@gmail.com'
-					}
-				]
+				iceServers: [{
+					urls: "turn:numb.viagenie.ca",
+					username: "muazkh",
+					credential: "webrtc@live.com"
+				}, {
+					urls: [
+						    "stun:stun.l.google.com:19302",
+							"stun:global.stun.twilio.com:3478?transport=udp"
+					]
+				}]
 			},
-
 			//wrtc: wrtc,
 
 			trickle: false,
@@ -142,15 +144,18 @@ function App() {
 			initiator: false,
 			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
             
-			/* config: {
-				iceServers: [
-					{
-						url: 'turn:numb.viagenie.ca',
-						credential: 'muazkh',
-						username: 'webrtc@live.com'
-					}
-				]
-			},*/
+			config: {
+				iceServers: [{
+					urls: "turn:numb.viagenie.ca",
+					username: "muazkh",
+					credential: "webrtc@live.com"
+				}, {
+					urls: [
+						    "stun:stun.l.google.com:19302",
+							"stun:global.stun.twilio.com:3478?transport=udp"
+					]
+				}]
+			},
 
 			/* secure: true,
 			host: 'https://lava-chat.herokuapp.com/',
