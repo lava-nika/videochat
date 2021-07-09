@@ -94,13 +94,12 @@ function App() {
 		const peer = new Peer({
 			initiator: true,
 
-			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
 			/*secure: true,
 			host: 'https://lava-chat.herokuapp.com/',
 			path: '/peerjs',
 			port: '443', */
 
-			config: {
+			/* config: {
 				iceServers: [{
 					urls: "turn:numb.viagenie.ca",
 					username: "muazkh",
@@ -111,8 +110,28 @@ function App() {
 							"stun:global.stun.twilio.com:3478?transport=udp"
 					]
 				}]
-			},
+			}, */
 			//wrtc: wrtc,
+
+
+		    config: {
+				iceServers: [
+					{
+						urls: [
+							"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
+						]
+						
+					},
+					{
+						urls: [
+							"turn:74.125.140.127:19305?transport=udp",
+							"turn:[2a00:1450:400c:c08::7f]:19305?transport=udp",
+							"turn:74.125.140.127:19305?transport=tcp",
+							"turn:[2a00:1450:400c:c08::7f]:19305?transport=tcp"
+						]
+					}
+				]
+			},
 
 			trickle: false,
 			stream: stream,
@@ -142,9 +161,8 @@ function App() {
 		setCallAccepted(true)
 		const peer = new Peer({
 			initiator: false,
-			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
             
-			config: {
+			/* config: {
 				iceServers: [{
 					urls: "turn:numb.viagenie.ca",
 					username: "muazkh",
@@ -155,12 +173,32 @@ function App() {
 							"stun:global.stun.twilio.com:3478?transport=udp"
 					]
 				}]
-			},
+			}, */
 
 			/* secure: true,
 			host: 'https://lava-chat.herokuapp.com/',
 			path: '/peerjs',
 			port: '443', */
+
+
+			config: {
+				iceServers: [
+					{
+						urls: [
+							"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
+						]
+						
+					},
+					{
+						urls: [
+							"turn:74.125.140.127:19305?transport=udp",
+							"turn:[2a00:1450:400c:c08::7f]:19305?transport=udp",
+							"turn:74.125.140.127:19305?transport=tcp",
+							"turn:[2a00:1450:400c:c08::7f]:19305?transport=tcp"
+						]
+					}
+				]
+			},
 
 
 			trickle: false,
