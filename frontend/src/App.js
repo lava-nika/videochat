@@ -128,7 +128,9 @@ function App() {
 							"turn:[2a00:1450:400c:c08::7f]:19305?transport=udp",
 							"turn:74.125.140.127:19305?transport=tcp",
 							"turn:[2a00:1450:400c:c08::7f]:19305?transport=tcp"
-						]
+						],
+						username: "ClrQztwFEgZjifbTqu4YqvGggqMKIICjBQ",
+						credential: "plCgCU1ooXMn60Xoaaugcc6Ow+c="
 					}
 				]
 			},
@@ -195,7 +197,10 @@ function App() {
 							"turn:[2a00:1450:400c:c08::7f]:19305?transport=udp",
 							"turn:74.125.140.127:19305?transport=tcp",
 							"turn:[2a00:1450:400c:c08::7f]:19305?transport=tcp"
-						]
+						],
+						username: "ClrQztwFEgZjifbTqu4YqvGggqMKIICjBQ",
+						credential: "plCgCU1ooXMn60Xoaaugcc6Ow+c="
+
 					}
 				]
 			},
