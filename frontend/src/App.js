@@ -94,7 +94,7 @@ function App() {
 		const peer = new Peer({
 			initiator: true,
 
-			config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
+			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
 			/*secure: true,
 			host: 'https://lava-chat.herokuapp.com/',
 			path: '/peerjs',
@@ -103,9 +103,9 @@ function App() {
 			config: {
 				iceServers: [
 					{
-						url: 'turn:numb.viagenie.ca',
-						credential: 'muazkh',
-						username: 'webrtc@live.com'
+						urls: 'turn:numb.viagenie.ca',
+						credential: 'Omsairam@1529',
+						username: 'lavanika2011@gmail.com'
 					}
 				]
 			},
@@ -142,7 +142,7 @@ function App() {
 			initiator: false,
 			// config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
             
-			config: {
+			/* config: {
 				iceServers: [
 					{
 						url: 'turn:numb.viagenie.ca',
@@ -150,7 +150,7 @@ function App() {
 						username: 'webrtc@live.com'
 					}
 				]
-			},
+			},*/
 
 			/* secure: true,
 			host: 'https://lava-chat.herokuapp.com/',
