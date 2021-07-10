@@ -117,13 +117,18 @@ function App() {
 		    config: {
 				iceServers: [
 					{
-						urls: [
+						
+						username:"89ddbf36-ccdc-11e8-b472-8624bbdc6721",
+						urls:["stun:w1.xirsys.com","turn:w1.xirsys.com:80?transport=udp","turn:w1.xirsys.com:3478?transport=udp","turn:w1.xirsys.com:80?transport=tcp","turn:w1.xirsys.com:3478?transport=tcp","turns:w1.xirsys.com:443?transport=tcp","turns:w1.xirsys.com:5349?transport=tcp"],
+						credential:"89ddbfb8-ccdc-11e8-8a3d-a2ce2294350d"
+						
+						/*urls: [
 							//"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
-							"stun:sp-turn1.xirsys.com:443", "turns:sp-turn1.xirsys.com:443?transport=tcp"
-						]
+							"stun:sp-turn1.xirsys.com:443", "turn:sp-turn1.xirsys.com:443?transport=tcp"
+						]*/
 						
 					},
-					{
+					/*{
 						urls: [
 							"turn:74.125.140.127:19305?transport=udp",
 							"turn:[2a00:1450:400c:c08::7f]:19305?transport=udp",
@@ -132,7 +137,7 @@ function App() {
 						],
 						username: "ClrQztwFEgZjifbTqu4YqvGggqMKllCjBQ",
 						credential: "plCgCU1ooXMn60Xoaaugcc6Ow+c="
-					}
+					}*/
 				]
 			},
 
@@ -187,13 +192,18 @@ function App() {
 			config: {
 				iceServers: [
 					{
-						urls: [
+						
+						username:"89ddbf36-ccdc-11e8-b472-8624bbdc6721",
+						urls:["stun:w1.xirsys.com","turn:w1.xirsys.com:80?transport=udp","turn:w1.xirsys.com:3478?transport=udp","turn:w1.xirsys.com:80?transport=tcp","turn:w1.xirsys.com:3478?transport=tcp","turns:w1.xirsys.com:443?transport=tcp","turns:w1.xirsys.com:5349?transport=tcp"],
+						credential:"89ddbfb8-ccdc-11e8-8a3d-a2ce2294350d"
+						
+						/*urls: [
 							//"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
-							"stun:sp-turn1.xirsys.com:443", "turns:sp-turn1.xirsys.com:443?transport=tcp"
-						]
+							"stun:sp-turn1.xirsys.com:443", "turn:sp-turn1.xirsys.com:443?transport=tcp"
+						]*/
 						
 					},
-					{
+					/*{
 						urls: [
 							"turn:74.125.140.127:19305?transport=udp",
 							"turn:[2a00:1450:400c:c08::7f]:19305?transport=udp",
@@ -203,7 +213,7 @@ function App() {
 						username: "ClrQztwFEgZjifbTqu4YqvGggqMKllCjBQ",
 						credential: "plCgCU1ooXMn60Xoaaugcc6Ow+c="
 
-					}
+					}*/
 				]
 			},
 
