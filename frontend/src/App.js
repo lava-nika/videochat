@@ -118,7 +118,8 @@ function App() {
 				iceServers: [
 					{
 						urls: [
-							"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
+							//"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
+							"stun:sp-turn1.xirsys.com:443", "turns:sp-turn1.xirsys.com:443?transport=tcp"
 						]
 						
 					},
@@ -187,7 +188,8 @@ function App() {
 				iceServers: [
 					{
 						urls: [
-							"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
+							//"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
+							"stun:sp-turn1.xirsys.com:443", "turns:sp-turn1.xirsys.com:443?transport=tcp"
 						]
 						
 					},
