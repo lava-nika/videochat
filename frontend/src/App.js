@@ -16,13 +16,15 @@ import { text } from "@fortawesome/fontawesome-svg-core"
 //import { Modal } from 'react-bootstrap';
 import CallEndIcon from '@material-ui/icons/CallEnd';
 import SendIcon from '@material-ui/icons/Send';
+//import { Button } from 'react-bootstrap';
 
-// const socket = io.connect('https://localhost3000')
-// "proxy": "https://localhost5000/", - in package.json of frontend
-const socket = io('https://lava-chat.herokuapp.com/');
+//import 'font-awesome/css/font-awesome.min.css';
+
+
+const socket = io.connect('https://lava-chat.herokuapp.com/')
 function App() {
-
-	// Video
+	
+	//Video
 
 	const [ me, setMe ] = useState("")
 	const [ stream, setStream ] = useState()
@@ -37,8 +39,6 @@ function App() {
 	const userVideo = useRef()
 	const connectionRef= useRef()
 
-	// var wrtc = require('wrtc')
-
 	// Chat
 	const [state, setState] = useState({message: '', name: ''})
 	const [chat, setChat] = useState([])
@@ -48,9 +48,9 @@ function App() {
 			setChat([...chat, {name, message}])
 		})
 	})
-
-
-
+	
+	
+	
 	const onTextChange = e => {
 		setState({...state, [e.target.name]: e.target.value})
 	}
@@ -58,12 +58,12 @@ function App() {
 	const onMessageSubmit = (e) => {
 		// prevents page refresh from happening
 		e.preventDefault()
-        // const {name, message} = state
-		const { message } = state
+		//const {name, message} = state
+		const { message} = state
 		socket.emit('message', {name, message})
 		setState({message: '', name })
 	}
-
+	
 	const renderChat = () => {
 		return chat.map(({name, message}, index) => (
 			<div key={index}>
@@ -73,10 +73,8 @@ function App() {
 			</div>
 		))
 	}
-
-
-
-	// Video contd
+	
+// Video contd
 
 	useEffect(() => {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
@@ -85,6 +83,10 @@ function App() {
 		})
 
 
+	// temp code
+	/*function enableMute() { 
+		myVideo.muted = true;
+	}	*/
 
 	socket.on("me", (id) => {
 			setMe(id)
@@ -101,55 +103,8 @@ function App() {
 	const callUser = (id) => {
 		const peer = new Peer({
 			initiator: true,
-			/*secure: true,
-			host: 'https://lava-chat.herokuapp.com/',
-			path: '/peerjs',
-			port: '443', */
-
-			/* config: {
-				iceServers: [{
-					urls: "turn:numb.viagenie.ca",
-					username: "muazkh",
-					credential: "webrtc@live.com"
-				}, {
-					urls: [
-						    "stun:stun.l.google.com:19302",
-							"stun:global.stun.twilio.com:3478?transport=udp"
-					]
-				}]
-			}, */
-			//wrtc: wrtc,
-
-
-		    config: {
-				iceServers: [
-					{
-						
-						username:"89ddbf36-ccdc-11e8-b472-8624bbdc6721",
-						urls:["stun:w1.xirsys.com","turn:w1.xirsys.com:80?transport=udp","turn:w1.xirsys.com:3478?transport=udp","turn:w1.xirsys.com:80?transport=tcp","turn:w1.xirsys.com:3478?transport=tcp","turns:w1.xirsys.com:443?transport=tcp","turns:w1.xirsys.com:5349?transport=tcp"],
-						credential:"89ddbfb8-ccdc-11e8-8a3d-a2ce2294350d"
-						
-						/*urls: [
-							//"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
-							"stun:sp-turn1.xirsys.com:443", "turn:sp-turn1.xirsys.com:443?transport=tcp"
-						]*/
-						
-					},
-					/*{
-						urls: [
-							"turn:74.125.140.127:19305?transport=udp",
-							"turn:[2a00:1450:400c:c08::7f]:19305?transport=udp",
-							"turn:74.125.140.127:19305?transport=tcp",
-							"turn:[2a00:1450:400c:c08::7f]:19305?transport=tcp"
-						],
-						username: "ClrQztwFEgZjifbTqu4YqvGggqMKllCjBQ",
-						credential: "plCgCU1ooXMn60Xoaaugcc6Ow+c="
-					}*/
-				]
-			},
-
 			trickle: false,
-			stream: stream,
+			stream: stream
 		})
 		peer.on("signal", (data) => {
 			socket.emit("callUser", {
@@ -176,53 +131,8 @@ function App() {
 		setCallAccepted(true)
 		const peer = new Peer({
 			initiator: false,
-            
-			/* config: {
-				iceServers: [{
-					urls: "turn:numb.viagenie.ca",
-					username: "muazkh",
-					credential: "webrtc@live.com"
-				}, {
-					urls: [
-						    "stun:stun.l.google.com:19302",
-							"stun:global.stun.twilio.com:3478?transport=udp"
-					]
-				}]
-			}, */
-
-
-			config: {
-				iceServers: [
-					{
-						
-						username:"89ddbf36-ccdc-11e8-b472-8624bbdc6721",
-						urls:["stun:w1.xirsys.com","turn:w1.xirsys.com:80?transport=udp","turn:w1.xirsys.com:3478?transport=udp","turn:w1.xirsys.com:80?transport=tcp","turn:w1.xirsys.com:3478?transport=tcp","turns:w1.xirsys.com:443?transport=tcp","turns:w1.xirsys.com:5349?transport=tcp"],
-						credential:"89ddbfb8-ccdc-11e8-8a3d-a2ce2294350d"
-						
-						/*urls: [
-							//"stun:66.102.1.127:19302", "stun:[2a00:1450:400c:c06::7f]:19302"
-							"stun:sp-turn1.xirsys.com:443", "turn:sp-turn1.xirsys.com:443?transport=tcp"
-						]*/
-						
-					},
-					/*{
-						urls: [
-							"turn:74.125.140.127:19305?transport=udp",
-							"turn:[2a00:1450:400c:c08::7f]:19305?transport=udp",
-							"turn:74.125.140.127:19305?transport=tcp",
-							"turn:[2a00:1450:400c:c08::7f]:19305?transport=tcp"
-						],
-						username: "ClrQztwFEgZjifbTqu4YqvGggqMKllCjBQ",
-						credential: "plCgCU1ooXMn60Xoaaugcc6Ow+c="
-
-					}*/
-				]
-			},
-
-
 			trickle: false,
-			stream: stream,
-			
+			stream: stream
 		})
 		peer.on("signal", (data) => {
 			socket.emit("answerCall", { signal: data, to: caller })
@@ -240,16 +150,14 @@ function App() {
 		connectionRef.current.destroy()
 	}
 
-    // Mute/unmute
-
 	let isAudio = true
 
 	let isVideo = true
 
 	const toggleAudio = () => {
 
-		isAudio = !isAudio
-		stream.getAudioTracks()[0].enabled = isAudio
+	isAudio = !isAudio
+    stream.getAudioTracks()[0].enabled = isAudio
 
 	}
 
@@ -257,11 +165,37 @@ function App() {
 
 		isVideo = !isVideo
 		stream.getVideoTracks()[0].enabled = isVideo
-
+	
 	}
 
+
+// TRIAL ID/Name details IMPLEMENTATION
+
+	const [show, setShow] = useState(false);
+  
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+
+
+
+
+
+// rendering chat
+	/*const enterPressed = (event) => {
+		var code = event.keyCode || event.which;
+		if(code === 13) { //13 is the enter keycode
+			//Do stuff in here
+			{renderChat()}
+		} 
+	}
+	const textChange = (event) => {
+		this.setState({
+		  name: event.target.value,
+		})
+	  } */
+
 	return (
-	<>
+		<>
 			
 		<div className="container">
 			<div className="video-container" class="container__left">
@@ -371,9 +305,8 @@ function App() {
 			</div>
 
 		</div>
-	    </>
+		</>
 	)
-
 }
 
 export default App
