@@ -13,12 +13,12 @@ import { faComment, faMicrophone } from '@fortawesome/free-solid-svg-icons'
 import { faVideo } from '@fortawesome/free-solid-svg-icons'
 import e from "cors"
 import { text } from "@fortawesome/fontawesome-svg-core"
-//import { Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import CallEndIcon from '@material-ui/icons/CallEnd';
 import SendIcon from '@material-ui/icons/Send';
 //import { Button } from 'react-bootstrap';
 
-//import 'font-awesome/css/font-awesome.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 
 const socket = io.connect('https://lava-chat.herokuapp.com/')
@@ -298,7 +298,7 @@ function App() {
 							label="Message"
 							/>
                             
-                            <button><SendIcon color="primary" style ></SendIcon></button>
+                            <button><SendIcon color="primary"></SendIcon></button>
 						</form>
 						
 					</div>
