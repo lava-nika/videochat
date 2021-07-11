@@ -261,7 +261,7 @@ function App() {
 	}
 
 	return (
-	    
+	<>
 			
 		<div className="container">
 			<div className="video-container" class="container__left">
@@ -371,8 +371,9 @@ function App() {
 			</div>
 
 		</div>
-	    
+	    </>
 	)
+
 }
 
 export default App
