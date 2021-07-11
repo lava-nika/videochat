@@ -8,6 +8,14 @@ import { CopyToClipboard } from "react-copy-to-clipboard"
 import Peer from "simple-peer"
 import io from "socket.io-client"
 import "./App.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComment, faMicrophone } from '@fortawesome/free-solid-svg-icons'
+import { faVideo } from '@fortawesome/free-solid-svg-icons'
+import e from "cors"
+import { text } from "@fortawesome/fontawesome-svg-core"
+//import { Modal } from 'react-bootstrap';
+import CallEndIcon from '@material-ui/icons/CallEnd';
+import SendIcon from '@material-ui/icons/Send';
 
 // const socket = io.connect('https://localhost3000')
 // "proxy": "https://localhost5000/", - in package.json of frontend
@@ -93,7 +101,6 @@ function App() {
 	const callUser = (id) => {
 		const peer = new Peer({
 			initiator: true,
-
 			/*secure: true,
 			host: 'https://lava-chat.herokuapp.com/',
 			path: '/peerjs',
@@ -183,11 +190,6 @@ function App() {
 				}]
 			}, */
 
-			/* secure: true,
-			host: 'https://lava-chat.herokuapp.com/',
-			path: '/peerjs',
-			port: '443', */
-
 
 			config: {
 				iceServers: [
@@ -260,22 +262,59 @@ function App() {
 
 	return (
 		<>
-			<h1 style={{ textAlign: "center", color: '#fff' }}>Lava Chat</h1>
+			
 		<div className="container">
-			<div className="video-container">
-				<div className="video">
-					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
-
-					<button onClick={toggleVideo} type="button">Camera on/off</button>
-					<button onClick={toggleAudio} type="button">Mute/Unmute</button>
-					
+			<div className="video-container" class="container__left">
+				<div className="video" class="container__videos">
+					<div id="video-grid">
+					    {stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "325px" }} />}
+				    </div>
 				</div>
+
 				
-				<div className="video">
+				<div className="video" class="container__videos">
 					{callAccepted && !callEnded ?
-					<video playsInline ref={userVideo} autoPlay style={{ width: "300px"}} />:
+					<video playsInline ref={userVideo} autoPlay style={{ width: "325px"}} />:
+
 					null}
 				</div>
+                <div>
+				    {receivingCall && !callAccepted ? (
+					    	<div className="caller">
+						    <h2>{name} is calling...</h2>
+						    <Button variant="contained" color="primary" onClick={answerCall}>
+							    Answer
+						    </Button>
+					    </div>
+				    ) : null}
+                </div>
+				<div class="container__controls">
+					<div class="container__controls__block">
+						<div class="container__controls__button">
+						    <FontAwesomeIcon icon={faMicrophone} onClick={toggleAudio} />
+							<span class="mic" onClick={toggleAudio}>Mute</span>
+						</div>
+						<div class="container__controls__button">
+						    <FontAwesomeIcon onClick={toggleVideo} icon={faVideo} />
+							<span class="camera" onClick={toggleVideo}>Camera</span>
+						</div>
+						
+						<div class="container__controls__button">
+						    
+							{callAccepted && !callEnded ? (
+                                    <CallEndIcon aria-label="callEnd" fontSize="large" color="secondary"
+									onClick={leaveCall}/>	
+					        ) : (
+						    <IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
+							    <PhoneIcon fontSize="large" color="primary"/>
+						    </IconButton>
+					        )}
+					        
+						</div>
+					</div>
+
+				</div>
+
 			</div>
 			<div className="myId">
 				<TextField
@@ -299,61 +338,37 @@ function App() {
 					value={idToCall}
 					onChange={(e) => setIdToCall(e.target.value)}
 				/>
-				<div className="call-button">
-					{callAccepted && !callEnded ? (
-						<Button variant="contained" color="secondary" onClick={leaveCall}>
-							End Call
-						</Button>
-					) : (
-						<IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
-							<PhoneIcon fontSize="large" />
-						</IconButton>
-					)}
-					{idToCall}
-				</div>
-			</div>
-			<div>
-				{receivingCall && !callAccepted ? (
-						<div className="caller">
-						<h1 >{name} is calling...</h1>
-						<Button variant="contained" color="primary" onClick={answerCall}>
-							Answer
-						</Button>
-					</div>
-				) : null}
-			</div>
-
-			<div className = "card">
-				<form onSubmit = {onMessageSubmit}>
-					<h2> Messenger </h2>
-					<div classname="name-field">
-						<TextField 
-						    name="name" 
-							onChange={e => onTextChange(e)} 
-							value={state.name} 
-							label="Name"
-						/>
-					</div>
-					<div>
-						<TextField 
-						    name="message" 
-							onChange={e => onTextChange(e)} 
-							value={state.message} 
-							id="outlined-multiline-static"
-							variant="outlined"
-							label="Message"
-						/>
-					</div>
-					<button>Send Message</button>
-				</form>
-				<div className="render-chat">
-					<h1>
-						Chat Log
-					</h1>
-					{renderChat()}
-				</div>
+				
 			</div>
 			
+			<div className="" class="container__right">
+				    <div class="container__header">
+						<h2>Chat</h2>
+					</div>
+					<div class="container__chat_window">
+					    <ul class="messages" className="render-chat">
+							{renderChat()}
+						</ul>
+					</div>
+					
+					<div class="message_container">
+						
+						<form onSubmit = {onMessageSubmit}>
+					        <input
+							id="chat_message" type="text" placeholder="Type message here..."
+							name="message" 
+							onChange={e => onTextChange(e)} 
+						    value={state.message} 
+							/*id="outlined-multiline-static"*/
+							/*variant="outlined"*/
+							label="Message"
+							/>
+                            
+                            <button><SendIcon color="primary" style ></SendIcon></button>
+						</form>
+						
+					</div>
+			</div>
 
 		</div>
 		</>
