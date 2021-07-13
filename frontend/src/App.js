@@ -40,6 +40,7 @@ function App() {
 	const connectionRef= useRef()
 
 	// Chat
+	
 	const [state, setState] = useState({message: '', name: ''})
 	const [chat, setChat] = useState([])
 
